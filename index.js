@@ -7,7 +7,7 @@ const PORT = 4000;
 
 app.use(bodyParser.json());
 
-
+// Rapid API key and translation endpoint URL
 const apiKey = '55c173d041msh9a67660f610a926p157966jsn855ad1153ea4';
 const translationEndpoint = 'https://google-translate1.p.rapidapi.com/language/translate/v2';
 
@@ -19,7 +19,7 @@ app.post('/translate', async (req, resp) => {
         return;
     }
 
-    
+    //parameters for the translation API using URLSearchParams
     const encodedParams = new URLSearchParams();
     encodedParams.set('q', text);
     encodedParams.set('target', 'fr');
@@ -38,16 +38,16 @@ app.post('/translate', async (req, resp) => {
     };
 
     try {
-     
+        //  request to  translation API
         const response = await axios.request(options);
         
-      
+        // Extract the translated text from the API response
         const translatedText = response.data.data.translations[0].translatedText;
 
        
         resp.json({ translation: translatedText });
     } catch (error) {
-     
+        // translation errors and respond with an error message
         console.error('Translation error:', error);
         resp.status(500).json({ error: `Translation error: ${error.message}` });
     }
