@@ -1,11 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import axios from 'axios';
-
+import cors from 'cors';
 const app = express();
 const PORT = 4000;
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // Rapid API key and translation endpoint URL
 const apiKey = '55c173d041msh9a67660f610a926p157966jsn855ad1153ea4';
